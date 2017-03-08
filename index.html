@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,7 +9,9 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.3.1/css/bulma.min.css">
   <link rel="stylesheet" type="text/css" href="css/base.css">
+  <script src="https://unpkg.com/vue"></script>
 </head>
+
 <body>
   <section class="hero is-fullheight is-default is-bold">
     <div class="hero-head">
@@ -16,12 +19,10 @@
         <nav class="nav has-shadow">
           <div class="container">
             <div class="nav-left">
-              <span>
-                Score: 0
-              </span>
+              <span>Score: 0</span>
             </div>
-            <div class="nav-right nav-menu">
-              <span>0:00</span>              
+            <div id="timer" class="nav-right nav-menu">
+              <span><button @click="counter">Begin</button> {{timeLeft}}</span>
             </div>
           </div>
         </nav>
@@ -38,9 +39,9 @@
           </div>
           <div class="column is-6 is-offset-1">
             <ul>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
+              <li><button>Option</button></li>
+              <li><button>Option</button></li>
+              <li><button>Option</button></li>
             </ul>
           </div>
         </div>
@@ -51,15 +52,42 @@
       <div class="container">
         <div class="tabs is-centered">
           <ul class="social-links">
-                    <li><a href="https://www.linkedin.com/in/christopher-diaz-b0864860" target="_blank"><i class="fa fa-linkedin"></i></a></li>
-                    <li><a href="http://stackoverflow.com/users/2530528/ju66ernaut?tab=profile" target="_blank"><i class="fa fa-stack-overflow"></i></a></li>
-                    <li><a href="https://github.com/Ju66ernaut" target="_blank"><i class="fa fa-github"></i></a></li>
-                    <li><a href="https://www.hackerrank.com/c_diaz86" target="_blank"><i class="fa fa-code"></i></a></li>
-                    <li><a href="https://twitter.com/the_ju66ernaut" target="_blank"><i class="fa fa-twitter"></i></a></li>
-                </ul>
+            <li><a href="https://www.linkedin.com/in/christopher-diaz-b0864860" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+            <li><a href="http://stackoverflow.com/users/2530528/ju66ernaut?tab=profile" target="_blank"><i class="fa fa-stack-overflow"></i></a></li>
+            <li><a href="https://github.com/Ju66ernaut" target="_blank"><i class="fa fa-github"></i></a></li>
+            <li><a href="https://www.hackerrank.com/c_diaz86" target="_blank"><i class="fa fa-code"></i></a></li>
+            <li><a href="https://twitter.com/the_ju66ernaut" target="_blank"><i class="fa fa-twitter"></i></a></li>
+          </ul>
         </div>
       </div>
     </div>
-  </section>  
+  </section>
+
+  <script>
+    let timer;
+    let timerVM = new Vue({
+      el: "#timer",
+      data: {
+        timeLeft: 10
+      },
+      methods: {
+        counter: function () {
+          timer = setInterval(this.tick, 1000);
+          return timer;
+        },
+        tick: function () {
+          if (this.timeLeft == 0) {
+            //console.log('times up');
+            alert('times up');
+            clearInterval(timer);
+          } 
+          else {
+            this.timeLeft--;
+          }
+        }
+      }
+    });
+  </script>
 </body>
+
 </html>
